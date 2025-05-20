@@ -29,7 +29,7 @@ def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = Fal
 				print(f'\r{flash_addr}b / {flash_size}b ... {flash_size-flash_addr} left', end='', flush=True)
 				flash_addr += 0x100
 			else:
-				print('Error: ' + flash_hex)
+				print('... Error (will retry once): ' + flash_hex)
 				# Retry on error once if we're not on the same address
 				if not last_err_at:
 					last_err_at = flash_addr
@@ -39,8 +39,7 @@ def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = Fal
 				else:
 					continue
 			#time.sleep(0.1)
-		print('')
-		print('complete.')
+		print(f'\r{flash_size}b / {flash_size}b ... complete', flush=True)
 
 if __name__ == '__main__':
 		print ('LN882H flash dump tool v1.1')
