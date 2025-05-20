@@ -3,7 +3,7 @@ import sys
 import subprocess
 
 
-def read_flash(filename, arg_port, flash_size, is_otp = False):
+def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = False) -> None:
 	flash_addr = 0x00000000
 
 	if is_otp:
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 			os._exit(1)
 
 		# dump flash OTP (1KB = 0x400)
-		otp_file = filename + "_otp.bin"
+		otp_file = filename + '_otp.bin'
 		print('Dumping flash OTP to ' + otp_file + ':')
 		read_flash(otp_file, arg_port, 0x00000400, True)
 
