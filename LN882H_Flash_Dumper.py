@@ -13,6 +13,7 @@ def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = Fal
 		start_tag = 'flash data:'
 
 	with Path(filename).open('wb') as flash_file:
+		last_err_at = 0
 		while flash_addr < flash_size:
 			flash_hex_addr = hex(flash_addr)
 			#flash_hex = f'flash data: {bytes.fromhex('0d').hex()}\nOk.'
@@ -29,7 +30,14 @@ def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = Fal
 				flash_addr += 0x100
 			else:
 				print('Error: ' + flash_hex)
-				os._exit(1)
+				# Retry on error once if we're not on the same address
+				if not last_err_at:
+					last_err_at = flash_addr
+					continue
+				elif last_err_at == flash_addr:
+					os._exit(1)
+				else:
+					continue
 			#time.sleep(0.1)
 		print('')
 		print('complete.')
