@@ -1,7 +1,7 @@
 import os
 import sys
 import subprocess
-
+from pathlib import Path
 
 def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = False) -> None:
 	flash_addr = 0x00000000
@@ -11,7 +11,7 @@ def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = Fal
 	else:
 		start_tag = 'flash data:'
 
-	with open(filename, "wb") as flash_file:
+	with Path(filename).open('wb') as flash_file:
 		while flash_addr < flash_size:
 			flash_hex_addr = hex(flash_addr)
 			if is_otp:
@@ -66,11 +66,11 @@ if __name__ == '__main__':
 			os._exit(1)
 
 		# dump flash OTP (1KB = 0x400)
-		otp_file = filename + '_otp.bin'
-		print('Dumping flash OTP to ' + otp_file + ':')
+		otp_file = f'{filename}_otp.bin'
+		print(f'Dumping flash OTP to {otp_file}:')
 		read_flash(otp_file, arg_port, 0x00000400, True)
 
 		# dump flash
-		flash_file = filename + '_flash.bin'
+		flash_file = f'{filename}_flash.bin'
 		print('Dumping flash (size: '+ hex(flash_size) + ') to ' + flash_file + ':')
 		read_flash(flash_file, arg_port, flash_size)
