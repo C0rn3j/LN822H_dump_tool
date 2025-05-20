@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+#import time
 from pathlib import Path
 
 def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = False) -> None:
@@ -14,6 +15,7 @@ def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = Fal
 	with Path(filename).open('wb') as flash_file:
 		while flash_addr < flash_size:
 			flash_hex_addr = hex(flash_addr)
+			#flash_hex = f'flash data: {bytes.fromhex('0d').hex()}\nOk.'
 			if is_otp:
 				flash_hex = subprocess.run(['LN882H_CMD_Tool.exe', arg_port, 'flash', 'otp', 'read', flash_hex_addr, '0x100'], capture_output=True, text=True).stdout
 			else:
@@ -23,11 +25,12 @@ def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = Fal
 				flash_hex = flash_hex.replace(start_tag, '')
 				bin = bytearray.fromhex(flash_hex)
 				flash_file.write(bin)
-				print('.', end='', flush=True)
+				print(f'\r{flash_addr}b / {flash_size}b ... {flash_size-flash_addr} left', end='', flush=True)
 				flash_addr += 0x100
 			else:
 				print('Error: ' + flash_hex)
 				os._exit(1)
+			#time.sleep(0.1)
 		print('')
 		print('complete.')
 
@@ -72,5 +75,5 @@ if __name__ == '__main__':
 
 		# dump flash
 		flash_file = f'{filename}_flash.bin'
-		print('Dumping flash (size: '+ hex(flash_size) + ') to ' + flash_file + ':')
+		print(f'Dumping flash (size: {hex(flash_size)}) to {flash_file}:')
 		read_flash(flash_file, arg_port, flash_size)
