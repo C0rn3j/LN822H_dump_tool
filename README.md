@@ -19,5 +19,9 @@ python LN882H_Flash_Dumper.py COM3 flashdump
 Example flash:
 
 ```bash
-python LN882H_Flash_Dumper.py COM3 download flash 2000000 0x0 OpenLN882H_1.17.427.bin
+./LN882H_CMD_Tool.exe COM3 download flash 2000000 0x0 OpenLN882H_1.18.102.bin
 ```
+
+The script was updated to be able to handle frequent read errors that I encountered, and actually show progress since the dump takes 15~+ minutes:
+
+[![Backup screenshot](docs/backup.png?raw=true)](docs/backup.png?raw=true)
