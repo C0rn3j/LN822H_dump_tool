@@ -1,6 +1,8 @@
 # LN822H_dump_tool
 
-Tool to help backup fw and flash https://github.com/openshwprojects/OpenBK7231T_App for LN822N chips.
+Tool to help backup fw and flash https://github.com/openshwprojects/OpenBK7231T_App for LN822N chips on Windows.
+
+For a Linux tool, see https://github.com/mandl/LN882Loader.
 
 FW flasher and its Python wrapper(initial version) taken from https://www.elektroda.com/rtvforum/topic4028087.html
 
