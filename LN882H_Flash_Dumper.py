@@ -39,7 +39,7 @@ def read_flash(filename: str, arg_port: str, flash_size: int, is_otp: bool = Fal
 				else:
 					continue
 			#time.sleep(0.1)
-		print(f'\r{flash_size}b / {flash_size}b ... complete', flush=True)
+		print(f'\r{flash_size}b / {flash_size}b ... complete   ', flush=True)
 
 if __name__ == '__main__':
 		print ('LN882H flash dump tool v1.1')
