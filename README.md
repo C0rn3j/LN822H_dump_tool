@@ -29,3 +29,7 @@ Example flash:
 The script was updated to be able to handle frequent read errors that I encountered, and actually show progress since the dump takes 15~+ minutes:
 
 [![Backup screenshot](docs/backup.png?raw=true)](docs/backup.png?raw=true)
+
+## Additional resources
+
+LN882HKI pinouts - https://www.elektroda.com/rtvforum/topic4054847.html
