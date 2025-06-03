@@ -4,6 +4,8 @@ Tool to help backup fw and flash https://github.com/openshwprojects/OpenBK7231T_
 
 For a Linux tool, see https://github.com/mandl/LN882Loader.
 
+For a GUI tool, see https://github.com/libretiny-eu/ltchiptool.
+
 FW flasher and its Python wrapper(initial version) taken from https://www.elektroda.com/rtvforum/topic4028087.html
 
 Example backup (replace COM3 with your device):
